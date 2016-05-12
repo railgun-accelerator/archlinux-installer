@@ -11,7 +11,7 @@ ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 hwclock --systohc --utc || true
 
 pacman -Syy archlinux-keyring --noconfirm --needed
-packages="mosh fish tmux git pkgfile"
+packages="mosh zsh tmux git pkgfile"
 if grep '^\[multilib\]' /etc/pacman.conf; then
     devel="gcc-multilib lib32-fakeroot lib32-libltdl autoconf  automake  binutils  bison  fakeroot  file  findutils  flex  gawk  gettext  grep  groff  gzip  libtool  m4  make  pacman  patch  pkg-config  sed  sudo  texinfo  util-linux  which"
     yes | pacman -Syu ${packages} ${devel} --needed
@@ -26,7 +26,7 @@ sed -i 's/#PermitEmptyPasswords.*/PermitEmptyPasswords no/' /etc/ssh/sshd_config
 pkgfile --update
 pkgfile makepkg
 
-useradd -m -g users -G wheel -s /bin/bash railgun
+useradd -m -g users -G wheel -s /usr/bin/zsh railgun
 echo '%wheel ALL=(ALL) NOPASSWD: ALL' > /etc/sudoers.d/railgun
 chmod 400 /etc/sudoers.d/railgun
 
@@ -43,11 +43,7 @@ git config --global user.email "zh99998@gmail.com"
 git config --global user.name "zh99998"
 git config --global push.default simple
 
-curl -L https://github.com/oh-my-fish/oh-my-fish/raw/master/bin/install | fish
-omf install robbyrussell
-
 echo 'set-option -g default-terminal "screen-256color"
-set-option -g default-shell /usr/bin/fish
 set -g status-right "[#(cat /proc/loadavg | cut -d \" \" -f 1,2,3)] #h"
 new-session' > /etc/tmux.conf
 
