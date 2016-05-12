@@ -26,7 +26,7 @@ sed -i 's/#PermitEmptyPasswords.*/PermitEmptyPasswords no/' /etc/ssh/sshd_config
 pkgfile --update
 pkgfile makepkg
 
-useradd -m -g users -G wheel -s /usr/bin/zsh railgun
+useradd -m -g users -G wheel -s /bin/bash railgun
 echo '%wheel ALL=(ALL) NOPASSWD: ALL' > /etc/sudoers.d/railgun
 chmod 400 /etc/sudoers.d/railgun
 
