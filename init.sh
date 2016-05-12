@@ -25,6 +25,10 @@ sed -i 's/#PermitEmptyPasswords.*/PermitEmptyPasswords no/' /etc/ssh/sshd_config
 pkgfile --update
 pkgfile makepkg
 
+echo 'set-option -g default-terminal "screen-256color"
+set -g status-right "[#(cat /proc/loadavg | cut -d \" \" -f 1,2,3)] #h"
+new-session' > /etc/tmux.conf
+
 useradd -m -g users -G wheel -s /usr/bin/zsh railgun
 echo '%wheel ALL=(ALL) NOPASSWD: ALL' > /etc/sudoers.d/railgun
 chmod 400 /etc/sudoers.d/railgun
@@ -41,10 +45,6 @@ chmod 700 ~/.ssh
 git config --global user.email "zh99998@gmail.com"
 git config --global user.name "zh99998"
 git config --global push.default simple
-
-echo 'set-option -g default-terminal "screen-256color"
-set -g status-right "[#(cat /proc/loadavg | cut -d \" \" -f 1,2,3)] #h"
-new-session' > /etc/tmux.conf
 
 echo 'source /usr/share/doc/pkgfile/command-not-found.zsh' >> ~/.zshrc
 
