@@ -5,7 +5,6 @@ sed -i 's/#en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen
 sed -i 's/#zh_CN.UTF-8 UTF-8/zh_CN.UTF-8 UTF-8/' /etc/locale.gen
 locale-gen
 
-#echo 'LANG=en_US.UTF-8' > /etc/locale.conf
 echo 'LANG=zh_CN.UTF-8' > /etc/locale.conf
 ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 hwclock --systohc --utc || true
@@ -46,5 +45,7 @@ git config --global push.default simple
 echo 'set-option -g default-terminal "screen-256color"
 set -g status-right "[#(cat /proc/loadavg | cut -d \" \" -f 1,2,3)] #h"
 new-session' > /etc/tmux.conf
+
+echo 'source /usr/share/doc/pkgfile/command-not-found.zsh' >> ~/.zshrc
 
 USER
